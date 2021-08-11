@@ -7,7 +7,7 @@ const userRouter = require('./routes/user.router')
 const carRouter = require('./routes/car.router')
 const cors = require('cors')
 
-const PORT = config.get('serverPort')
+const PORT = '8080'
 
 const app = express()
 
