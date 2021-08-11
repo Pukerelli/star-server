@@ -60,7 +60,7 @@ const UserController = {
             res.status(500)
         }
     },
-    followingUsers: async (req, res) => {
+    followedUsers: async (req, res) => {
         try {
             const user = await User.findOne({_id: req.user._id})
             const data = await User.find({followedBy: user.username})

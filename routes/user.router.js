@@ -12,7 +12,7 @@ router.put('/put/user/update', authMiddleware, UserController.updateProfile)
 
 router.post('/post/user/update/photo', authMiddleware, UserController.updatePhoto)
 
-router.get('/get/user/list/following', authMiddleware, UserController.followingUsers)
+router.get('/get/user/list/following', authMiddleware, UserController.followedUsers)
 
 router.post('/post/user/follow', authMiddleware, UserController.followUser)
 
