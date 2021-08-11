@@ -1,5 +1,5 @@
 {
-  "serverPort": "5000",
+  "serverPort": "80",
   "dbUrl": "mongodb+srv://Creator:govnoed123@neutron.mdynz.mongodb.net/Neutron?retryWrites=true&w=majority",
   "secretKey": "NeutronStar"
 }
