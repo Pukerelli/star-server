@@ -16,7 +16,7 @@ const UserController = {
     updateProfile: async (req, res) => {
         try {
             await User.findOneAndUpdate({_id: req.user._id}, {
-                fullName: req.body.fullName.toLowerCase(),
+                fullName: req.body.fullName,
                 age: req.body.age,
                 drivingExperience: req.body.drivingExperience,
                 address: {
@@ -131,8 +131,8 @@ const UserController = {
                 data = await User.find({
                     $or:
                         [
-                            {username: {$regex: search}},
-                            {fullName: {$regex: search}}
+                            {username: {$regex: search, $options:'i'}},
+                            {fullName: {$regex: search, $options:'i'}}
                         ]
                 })
             }

@@ -189,11 +189,11 @@ const CarController = {
                 data = await Car.find({
                     $or:
                         [
-                            {name: {$regex: search}},
-                            {owner: {$regex: search}},
-                            {brand: {$regex: search}},
-                            {model: {$regex: search}},
-                            {generation: {$regex: search}},
+                            {name: {$regex: search, $options:'i'}},
+                            {owner: {$regex: search, $options:'i'}},
+                            {brand: {$regex: search, $options:'i'}},
+                            {model: {$regex: search, $options:'i'}},
+                            {generation: {$regex: search, $options:'i'}},
                         ]
                 })
             }
