@@ -12,6 +12,7 @@ const AuthController = {
                 return res.json({error: 'missed fields'})
             }
             const {username, email, password} = req.body
+            username.toLowerCase()
             const checkUsername = await User.findOne({username})
             const checkEmail = await User.findOne({email})
             if (checkUsername) {

@@ -1,4 +1,4 @@
-const dataAddressTransform = (obj) => {
+const dataTransform = (obj) => {
     const newData = {...obj}
     delete newData.country
     delete newData.city
@@ -6,7 +6,18 @@ const dataAddressTransform = (obj) => {
         city: obj.city,
         country: obj.country
     }
+    for (let prop in newData) {
+        if (newData.hasOwnProperty(prop)) {
+            if (prop === newData.address) {
+                prop.city.toLowerCase()
+                prop.country.toLowerCase()
+                continue
+            }
+            prop.toLowerCase()
+        }
+    }
+
     return newData
 }
 
-module.exports = dataAddressTransform
+module.exports = dataTransform

@@ -1,7 +1,7 @@
 const {validationResult} = require('express-validator')
 const Car = require('../models/cars')
 const User = require('../models/user')
-const dataAddressTransform = require("../common/functions");
+const dataTransform = require("../common/functions");
 
 const CarController = {
     cars: async (req, res) => {
@@ -44,7 +44,7 @@ const CarController = {
             if (!errors.isEmpty()) {
                 return res.json({error: errors})
             }
-            const values = dataAddressTransform(req.body)
+            const values = dataTransform(req.body)
 
             const user = await User.findOneAndUpdate({_id: req.user._id}, {
                 $addToSet: {cars: values.name}
@@ -72,7 +72,7 @@ const CarController = {
     },
     update: async (req, res) => {
         try {
-            const update = dataAddressTransform(req.body)
+            const update = dataTransform(req.body)
             await Car.findOneAndUpdate({name: req.body.name}, {...update},
                 async (err) => {
                     if (err) {

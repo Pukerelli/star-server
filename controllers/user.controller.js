@@ -16,7 +16,7 @@ const UserController = {
     updateProfile: async (req, res) => {
         try {
             await User.findOneAndUpdate({_id: req.user._id}, {
-                fullName: req.body.fullName,
+                fullName: req.body.fullName.toLowerCase(),
                 age: req.body.age,
                 drivingExperience: req.body.drivingExperience,
                 address: {
@@ -123,6 +123,7 @@ const UserController = {
     search: async (req, res) => {
         try {
             const search = req.query.search
+            search.toLowerCase()
             let data = {}
             if (search === '') {
                 data = await User.find({})
