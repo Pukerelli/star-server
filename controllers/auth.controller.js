@@ -42,6 +42,7 @@ const AuthController = {
                 return res.json({error: 'missed fields', ...errors})
             }
             const {username, password} = req.body
+            username.toLowerCase()
             const data = await User.findOne({username})
             if (!data) {
                 return res.json({error: "username not found"})
