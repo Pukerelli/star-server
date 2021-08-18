@@ -12,8 +12,7 @@ const AuthController = {
                 return res.json({error: 'missed fields'})
             }
             const {username, email, password} = req.body
-            username.toLowerCase()
-            const checkUsername = await User.findOne({username})
+            const checkUsername = await User.findOne({username: username.toLowerCase})
             const checkEmail = await User.findOne({email})
             if (checkUsername) {
                 return res.json({error: 'username is already taken'})
@@ -23,7 +22,11 @@ const AuthController = {
             }
             const hashPassword = await bcrypt.hash(password, 4)
             const id = Date.now()
-            const data = await new User({username, email, password: hashPassword, id})
+            const data = await new User({
+                username: username.toLowerCase(),
+                email, password: hashPassword,
+                id
+            })
             await data.save()
             const token = jwt.sign({_id: data._id}, config.get('secretKey'), {expiresIn: '1h'})
             return res.status(200).json({
@@ -42,8 +45,8 @@ const AuthController = {
                 return res.json({error: 'missed fields', ...errors})
             }
             const {username, password} = req.body
-            username.toLowerCase()
-            const data = await User.findOne({username})
+
+            const data = await User.findOne({username: username.toLowerCase()})
             if (!data) {
                 return res.json({error: "username not found"})
             }
