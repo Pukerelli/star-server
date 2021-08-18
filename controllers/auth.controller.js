@@ -30,7 +30,7 @@ const AuthController = {
             await data.save()
             const token = jwt.sign({_id: data._id}, config.get('secretKey'), {expiresIn: '1h'})
             return res.status(200).json({
-                data: username,
+                data: username.toLowerCase(),
                 token,
                 message: 'success'
             })
