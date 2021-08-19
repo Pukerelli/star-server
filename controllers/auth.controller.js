@@ -12,8 +12,8 @@ const AuthController = {
                 return res.json({error: 'missed fields'})
             }
             const {username, email, password} = req.body
-            const checkUsername = await User.findOne({username: username.toLowerCase})
-            const checkEmail = await User.findOne({email})
+            const checkUsername = await User.findOne({username: username.toLowerCase()})
+            const checkEmail = await User.findOne({email: email.toLowerCase()})
             if (checkUsername) {
                 return res.json({error: 'username is already taken'})
             }
@@ -24,7 +24,7 @@ const AuthController = {
             const id = Date.now()
             const data = await new User({
                 username: username.toLowerCase(),
-                email, password: hashPassword,
+                email: email.toLowerCase(), password: hashPassword,
                 id
             })
             await data.save()
