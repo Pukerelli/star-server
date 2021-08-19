@@ -47,10 +47,10 @@ const CarController = {
             const values = dataTransform(req.body)
 
             const user = await User.findOneAndUpdate({_id: req.user._id}, {
-                $addToSet: {cars: values.name}
+                $addToSet: {cars: values.name.toLowerCase()}
             })
             const owner = user.username
-            const checkName = await Car.findOne({name: values.name})
+            const checkName = await Car.findOne({name: values.name.toLowerCase()})
             if (checkName) {
                 return res.json({error: 'name is already taken'})
             }
@@ -58,6 +58,7 @@ const CarController = {
             const car = await new Car(
                 {
                     ...values,
+                    name: values.name.toLowerCase(),
                     owner,
                     id
                 })
