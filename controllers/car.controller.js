@@ -45,8 +45,7 @@ const CarController = {
             if (!errors.isEmpty()) {
                 return res.json({error: errors})
             }
-            const request = helpers.dataAddressTransform(req.body)
-            const values = helpers.toLowerCaseTransform(request)
+            const values = helpers.toLowerCaseTransform(req.body)
             const user = await User.findOneAndUpdate({_id: req.user._id}, {
                 $addToSet: {cars: values.name}
             })
@@ -73,14 +72,13 @@ const CarController = {
     },
     update: async (req, res) => {
         try {
-            const request = helpers.dataAddressTransform(req.body)
-            const update = helpers.toLowerCaseTransform(request)
-            await Car.findOneAndUpdate({name: update.name}, {...update},
+            const update = helpers.toLowerCaseTransform(req.body)
+            await Car.findOneAndUpdate({name: req.body.name}, {...update},
                 async (err) => {
                     if (err) {
                         return res.json({error: err})
                     } else {
-                        const data = await Car.findOne({name: update.name})
+                        const data = await Car.findOne({name: req.body.name})
                         return res.status(200).json({
                             data,
                             message: 'success'
@@ -195,6 +193,7 @@ const CarController = {
                             {owner: {$regex: search, $options:'i'}},
                             {brand: {$regex: search, $options:'i'}},
                             {model: {$regex: search, $options:'i'}},
+                            {location: {$regex: search, $options:'i'}},
                             {generation: {$regex: search, $options:'i'}},
                         ]
                 })

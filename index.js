@@ -6,6 +6,7 @@ const authRouter = require('./routes/auth.router')
 const userRouter = require('./routes/user.router')
 const carRouter = require('./routes/car.router')
 const cors = require('cors')
+const PORT = process.env.PORT || 5000
 
 const app = express()
 
@@ -22,8 +23,8 @@ app.use('/api/cars', carRouter)
 const start = async () => {
     try {
         await mongoose.connect(config.get('dbUrl'))
-        app.listen(process.env.PORT || 5000, () => {
-            console.log(`server started on port`)
+        app.listen(PORT, () => {
+            console.log(`server started on port ${PORT}`)
         })
     } catch (e) {
         console.log(e)

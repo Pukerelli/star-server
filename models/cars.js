@@ -14,13 +14,16 @@ const Car = new Schema({
     engine: String,
     hp: String,
     mileage: String,
-    address: {country: String, city: String},
+    location: String,
     rims: String,
     ownTime: String,
     followedBy: Array,
     notes: [{title: String, date: String, description: String, carname: String}]
 })
-Car.index({ name: 'text', owner: 'text', brand: 'text', model: 'text', generation: 'text', engine: 'text' });
+Car.index({
+    name: 'text', owner: 'text', brand: 'text', model: 'text',
+    generation: 'text', location: 'text', engine: 'text'
+});
 
 
 module.exports = model('Car', Car)
