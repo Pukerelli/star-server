@@ -11,9 +11,9 @@ const dataTransform = (obj) => {
 
 const toLowerCaseTransform = (obj) => {
     const newObj = {...obj}
-    for (let prop in newObj) {
-        if(newObj.hasOwnProperty(prop) && typeof prop === 'string')
-        prop.toLowerCase()
+    for (let key in newObj) {
+        if (newObj.hasOwnProperty(key) && typeof newObj[key] === 'string')
+            newObj[key] = newObj[key].toLowerCase()
     }
     return newObj
 }
