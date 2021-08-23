@@ -10,11 +10,12 @@ const dataTransform = (obj) => {
 }
 
 const toLowerCaseTransform = (obj) => {
-    for (let prop in obj) {
-        if(obj.hasOwnProperty(prop) && typeof prop === 'string')
+    const newObj = {...obj}
+    for (let prop in newObj) {
+        if(newObj.hasOwnProperty(prop) && typeof prop === 'string')
         prop.toLowerCase()
     }
-    return obj
+    return newObj
 }
 
 
