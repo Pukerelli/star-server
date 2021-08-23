@@ -17,12 +17,12 @@ const UserController = {
         try {
 
             await User.findOneAndUpdate({_id: req.user._id}, {
-                fullName: req.body.fullName.toUpperCase(),
+                fullName: req.body.fullName.toLowerCase(),
                 age: req.body.age,
                 drivingExperience: req.body.drivingExperience,
                 address: {
-                    country: req.body.country.toUpperCase(),
-                    city: req.body.city.toUpperCase()
+                    country: req.body.country.toLowerCase(),
+                    city: req.body.city.toLowerCase()
                 },
                 contacts: {
                     whatsapp: req.body.whatsapp,

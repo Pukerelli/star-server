@@ -75,12 +75,12 @@ const CarController = {
         try {
             const request = helpers.dataAddressTransform(req.body)
             const update = helpers.toLowerCaseTransform(request)
-            await Car.findOneAndUpdate({name: req.body.name}, {...update},
+            await Car.findOneAndUpdate({name: update.name}, {...update},
                 async (err) => {
                     if (err) {
                         return res.json({error: err})
                     } else {
-                        const data = await Car.findOne({name: req.body.name})
+                        const data = await Car.findOne({name: update.name})
                         return res.status(200).json({
                             data,
                             message: 'success'

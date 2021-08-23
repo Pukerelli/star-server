@@ -3,8 +3,8 @@ const dataTransform = (obj) => {
     delete newData.country
     delete newData.city
     newData.address = {
-        city: obj.city,
-        country: obj.country
+        city: obj.city.toLowerCase(),
+        country: obj.country.toLowerCase()
     }
     return newData
 }
