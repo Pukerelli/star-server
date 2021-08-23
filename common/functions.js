@@ -9,4 +9,14 @@ const dataTransform = (obj) => {
     return newData
 }
 
-module.exports = dataTransform
+const toLowerCaseTransform = (obj) => {
+    for (let prop in obj) {
+        if(obj.hasOwnProperty(prop) && typeof prop === 'string')
+        prop.toLowerCase()
+    }
+    return obj
+}
+
+
+exports.dataAddressTransform = dataTransform
+exports.toLowerCaseTransform = toLowerCaseTransform

@@ -15,13 +15,14 @@ const UserController = {
     },
     updateProfile: async (req, res) => {
         try {
+
             await User.findOneAndUpdate({_id: req.user._id}, {
-                fullName: req.body.fullName,
+                fullName: req.body.fullName.toUpperCase(),
                 age: req.body.age,
                 drivingExperience: req.body.drivingExperience,
                 address: {
-                    country: req.body.country,
-                    city: req.body.city
+                    country: req.body.country.toUpperCase(),
+                    city: req.body.city.toUpperCase()
                 },
                 contacts: {
                     whatsapp: req.body.whatsapp,

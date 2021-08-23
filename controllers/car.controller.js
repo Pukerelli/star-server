@@ -1,7 +1,8 @@
 const {validationResult} = require('express-validator')
 const Car = require('../models/cars')
 const User = require('../models/user')
-const dataTransform = require("../common/functions");
+const helpers = require("../common/functions");
+
 
 const CarController = {
     cars: async (req, res) => {
@@ -44,13 +45,13 @@ const CarController = {
             if (!errors.isEmpty()) {
                 return res.json({error: errors})
             }
-            const values = dataTransform(req.body)
-
+            const request = helpers.dataAddressTransform(req.body)
+            const values = helpers.toLowerCaseTransform(request)
             const user = await User.findOneAndUpdate({_id: req.user._id}, {
-                $addToSet: {cars: values.name.toLowerCase()}
+                $addToSet: {cars: values.name}
             })
             const owner = user.username
-            const checkName = await Car.findOne({name: values.name.toLowerCase()})
+            const checkName = await Car.findOne({name: values.name})
             if (checkName) {
                 return res.json({error: 'name is already taken'})
             }
@@ -58,7 +59,6 @@ const CarController = {
             const car = await new Car(
                 {
                     ...values,
-                    name: values.name.toLowerCase(),
                     owner,
                     id
                 })
@@ -73,7 +73,8 @@ const CarController = {
     },
     update: async (req, res) => {
         try {
-            const update = dataTransform(req.body)
+            const request = helpers.dataAddressTransform(req.body)
+            const update = helpers.toLowerCaseTransform(request)
             await Car.findOneAndUpdate({name: req.body.name}, {...update},
                 async (err) => {
                     if (err) {
