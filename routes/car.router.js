@@ -13,8 +13,8 @@ router.get('/get/current/:carname', CarController.current)
 router.post('/post/add',
     [
         check('name', 'incorrect name').isLength({min: 3, max: 10}),
-        check('brand', 'incorrect brand').isLength({min: 3, max: 15}),
-        check('model', 'incorrect model').isLength({min: 3, max: 20}),
+        check('brand', 'incorrect brand').isLength({min: 1, max: 15}),
+        check('model', 'incorrect model').isLength({min: 1, max: 20}),
 
     ], authMiddleware, CarController.add
 )
